@@ -63,6 +63,7 @@ public class Connect4 {
 
         // check diagonally, upper left to lower right
         Arrays.fill(counts, 1);
+        // left side
         for(int i = 1, j = 0; i < m; i++) {
             for(int row = i+1, col = j+1; row < m && col < n; row++, col++) {
                 int curr = board[row][col];
@@ -75,6 +76,7 @@ public class Connect4 {
                 else counts[curr] = 1;
             }
         }
+        // right side
         for(int i = 0, j = 0; j < n; j++) {
             for(int row = i+1, col = j+1; row < m && col < n; row++, col++) {
                 int curr = board[row][col];
@@ -92,6 +94,7 @@ public class Connect4 {
 
         // check diagonally upper right to lower left
         Arrays.fill(counts, 1);
+        // left side
         for(int i = 0, j = n-2; j > 0; j--) {
             for(int row = i+1, col = j-1; row < m && col >= 0; row++, col--) {
                 int curr = board[row][col];
@@ -104,6 +107,7 @@ public class Connect4 {
                 else counts[curr] = 1;
             }
         }
+        // right side
         for(int i = 0, j = n-1; i < m; i++) {
             for(int row = i+1, col = j-1; row < m && col >= 0; row++, col--) {
                 int curr = board[row][col];
@@ -117,7 +121,9 @@ public class Connect4 {
             }
         }
 
-
+        // determine who's the winner
+        // if there are more than one player that meet the winning criteria
+        // the one with the highest consecutive discs wins
         int max = -1, winner = -1;
         for(int player : maxCount.keySet()) {
             if(player == 0) continue;
